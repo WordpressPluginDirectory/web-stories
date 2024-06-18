@@ -287,20 +287,18 @@ class Story_Post_Type extends Post_Type_Base implements HasRequirements, HasMeta
 	 * @return bool|string Whether the post type should have an archive, or archive slug.
 	 */
 	public function get_has_archive() {
-		$archive_page_option    = $this->settings->get_setting( $this->settings::SETTING_NAME_ARCHIVE );
-		$custom_archive_page_id = (int) $this->settings->get_setting( $this->settings::SETTING_NAME_ARCHIVE_PAGE_ID );
-		$has_archive            = true;
+		$archive_page_option = $this->settings->get_setting( $this->settings::SETTING_NAME_ARCHIVE );
+		$has_archive         = true;
 
 		if ( 'disabled' === $archive_page_option ) {
 			$has_archive = false;
-		} elseif (
-			'custom' === $archive_page_option &&
-			$custom_archive_page_id &&
-			'publish' === get_post_status( $custom_archive_page_id )
-		) {
-			$uri = get_page_uri( $custom_archive_page_id );
-			if ( $uri ) {
-				$has_archive = urldecode( $uri );
+		} elseif ( 'custom' === $archive_page_option ) {
+			$custom_archive_page_id = (int) $this->settings->get_setting( $this->settings::SETTING_NAME_ARCHIVE_PAGE_ID );
+			if ( $custom_archive_page_id && 'publish' === get_post_status( $custom_archive_page_id ) ) {
+				$uri = get_page_uri( $custom_archive_page_id );
+				if ( $uri ) {
+					$has_archive = urldecode( $uri );
+				}
 			}
 		}
 
@@ -334,7 +332,7 @@ class Story_Post_Type extends Post_Type_Base implements HasRequirements, HasMeta
 			'labels'                => [
 				'name'                     => _x( 'Stories', 'post type general name', 'web-stories' ),
 				'singular_name'            => _x( 'Story', 'post type singular name', 'web-stories' ),
-				'add_new'                  => _x( 'Add New', 'story', 'web-stories' ),
+				'add_new'                  => __( 'Add New Story', 'web-stories' ),
 				'add_new_item'             => __( 'Add New Story', 'web-stories' ),
 				'edit_item'                => __( 'Edit Story', 'web-stories' ),
 				'new_item'                 => __( 'New Story', 'web-stories' ),

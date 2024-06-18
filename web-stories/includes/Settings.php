@@ -145,6 +145,16 @@ class Settings implements Service, Registerable, PluginUninstallAware {
 	public const SETTING_NAME_DEFAULT_PAGE_DURATION = 'web_stories_default_page_duration';
 
 	/**
+	 * GA Tracking Handler.
+	 */
+	public const SETTING_NAME_TRACKING_HANDLER = 'web_stories_ga_tracking_handler';
+
+	/**
+	 * Customizer settings.
+	 */
+	public const SETTING_NAME_CUSTOMIZER_SETTINGS = 'web_stories_customizer_settings';
+
+	/**
 	 * Shopping_Vendors instance.
 	 *
 	 * @var Shopping_Vendors Shopping_Vendors instance.
@@ -158,6 +168,18 @@ class Settings implements Service, Registerable, PluginUninstallAware {
 	 */
 	public function __construct( Shopping_Vendors $shopping_vendors ) {
 		$this->shopping_vendors = $shopping_vendors;
+	}
+
+	/**
+	 * Primes option caches for specified groups if the function exists.
+	 *
+	 * @since 1.37.0
+	 */
+	public function prime_option_caches(): void {
+		if ( \function_exists( 'wp_prime_option_caches_by_group' ) ) {
+			wp_prime_option_caches_by_group( self::SETTING_GROUP );
+			wp_prime_option_caches_by_group( self::SETTING_GROUP_EXPERIMENTS );
+		}
 	}
 
 	/**
@@ -331,18 +353,15 @@ class Settings implements Service, Registerable, PluginUninstallAware {
 			self::SETTING_GROUP_EXPERIMENTS,
 			self::SETTING_NAME_EXPERIMENTS,
 			[
-				'description'     => __( 'Experiments', 'web-stories' ),
-				'type'            => 'object',
-				'default'         => [],
-				'show_in_rest'    => [
+				'description'  => __( 'Experiments', 'web-stories' ),
+				'type'         => 'object',
+				'default'      => [],
+				'show_in_rest' => [
 					'schema' => [
 						'properties'           => [],
 						'additionalProperties' => true,
 					],
 				],
-				// WPGraphQL errors when encountering array or object types.
-				// See https://github.com/wp-graphql/wp-graphql/issues/2065.
-				'show_in_graphql' => false,
 			]
 		);
 
@@ -403,6 +422,35 @@ class Settings implements Service, Registerable, PluginUninstallAware {
 				'show_in_rest' => true,
 			]
 		);
+
+		register_setting(
+			self::SETTING_GROUP,
+			self::SETTING_NAME_TRACKING_HANDLER,
+			[
+				'description'  => __( 'Tracking Handler', 'web-stories' ),
+				'type'         => 'string',
+				'default'      => 'site-kit',
+				'show_in_rest' => [
+					'schema' => [
+						'type' => 'string',
+						'enum' => [ 'site-kit', 'web-stories', 'both' ],
+					],
+				],
+			]
+		);
+
+		register_setting(
+			self::SETTING_GROUP,
+			self::SETTING_NAME_CUSTOMIZER_SETTINGS,
+			[
+				'description'  => __( 'Customizer settings', 'web-stories' ),
+				'type'         => 'array',
+				'default'      => [],
+				'show_in_rest' => false,
+			]
+		);
+
+		add_action( 'init', [ $this, 'prime_option_caches' ] );
 	}
 
 	/**
@@ -495,6 +543,7 @@ class Settings implements Service, Registerable, PluginUninstallAware {
 		delete_option( self::SETTING_NAME_SHOPIFY_ACCESS_TOKEN );
 		delete_option( self::SETTING_NAME_DEFAULT_PAGE_DURATION );
 		delete_option( self::SETTING_NAME_AUTO_ADVANCE );
+		delete_option( self::SETTING_NAME_TRACKING_HANDLER );
 	}
 
 	/**

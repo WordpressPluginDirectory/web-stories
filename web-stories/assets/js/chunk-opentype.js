@@ -1,1 +1,1 @@
-(globalThis.webpackChunkweb_stories_wp=globalThis.webpackChunkweb_stories_wp||[]).push([[2794],{46102:()=>{}}]);
+(globalThis.webpackChunkweb_stories_wp=globalThis.webpackChunkweb_stories_wp||[]).push([[8635],{47256:()=>{}}]);
