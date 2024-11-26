@@ -723,7 +723,6 @@ class AMP_Style_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_Sani
      */
     public function init($sanitizers)
     {
-        parent::init($sanitizers);
         $this->sanitizers = $sanitizers;
     }
     /**

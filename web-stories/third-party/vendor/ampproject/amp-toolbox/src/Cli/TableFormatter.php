@@ -65,7 +65,7 @@ class TableFormatter
      *
      * @param Colors|null $colors Optional. Instance of the Colors helper object.
      */
-    public function __construct(Colors $colors = null)
+    public function __construct(?Colors $colors = null)
     {
         // Try to get terminal width.
         $width = $this->getTerminalWidth();

@@ -88,7 +88,6 @@ class AMP_Script_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_San
      */
     public function init($sanitizers)
     {
-        parent::init($sanitizers);
         $this->sanitizers = $sanitizers;
     }
     /**

@@ -77,7 +77,7 @@ final class ValidationResult
      *                                                        $attrSpecs in this $tagSpec match. Defaults to an empty
      *                                                        array.
      */
-    public function __construct(ValidationStatus $status = null, ValidationErrorCollection $errors = null, $specRevision = -1, $transformerVersion = 0, $typeIdentifiers = [], $valueSetProvisions = [], $valueSetRequirements = [])
+    public function __construct(?ValidationStatus $status = null, ?ValidationErrorCollection $errors = null, $specRevision = -1, $transformerVersion = 0, $typeIdentifiers = [], $valueSetProvisions = [], $valueSetRequirements = [])
     {
         $this->status = $status instanceof ValidationStatus ? $status : ValidationStatus::UNKNOWN();
         $this->errors = $errors instanceof ValidationErrorCollection ? $errors : new ValidationErrorCollection();

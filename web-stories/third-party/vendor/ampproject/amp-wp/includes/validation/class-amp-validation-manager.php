@@ -911,7 +911,7 @@ class AMP_Validation_Manager
                         }
                         $has_non_core = \false;
                         foreach ($extra_sources as $extra_source) {
-                            if ('core' !== $extra_source['type']) {
+                            if (isset($extra_source['type']) && 'core' !== $extra_source['type']) {
                                 $has_non_core = \true;
                                 break;
                             }
@@ -1276,6 +1276,7 @@ class AMP_Validation_Manager
         // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- Only way to find out if we are in a buffering display handler.
         foreach ($backtrace as $call_stack) {
             if ('{closure}' === $call_stack['function']) {
+                // TODO: This may not be the right format for PHP 8.4.
                 $called_functions[] = 'Closure::__invoke';
             } elseif (isset($call_stack['class'])) {
                 $called_functions[] = \sprintf('%s::%s', $call_stack['class'], $call_stack['function']);
@@ -1985,12 +1986,6 @@ class AMP_Validation_Manager
          */
         if (!self::get_dev_tools_user_access()->is_user_enabled()) {
             return;
-        }
-        // Block validation script uses features only available beginning with WP 5.6.
-        $dependency_support = Services::get('dependency_support');
-        if (!$dependency_support->has_support()) {
-            return;
-            // @codeCoverageIgnore
         }
         // Only enqueue scripts on the block editor for AMP-enabled posts.
         $editor_support = Services::get('editor.editor_support');

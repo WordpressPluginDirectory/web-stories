@@ -147,7 +147,7 @@ final class AmpBindAttributes implements BeforeLoadFilter, AfterSaveFilter
                 $offset += \strlen($attrMatches[0]);
                 $attrName = \substr($attrMatches['name'], \strlen(Amp::BIND_DATA_ATTR_PREFIX));
                 if ($this->options[Option::AMP_BIND_SYNTAX] === Option::AMP_BIND_SYNTAX_SQUARE_BRACKETS || \in_array($attrName, $this->convertedAmpBindAttributes, \true)) {
-                    $attrValue = isset($attrMatches['value']) ? $attrMatches['value'] : '=""';
+                    $attrValue = $attrMatches['value'] ?? '=""';
                     $newAttrs .= " [{$attrName}]{$attrValue}";
                 } else {
                     $newAttrs .= $attrMatches[0];

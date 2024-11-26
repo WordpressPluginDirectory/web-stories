@@ -336,7 +336,7 @@ class AMP_DOM_Utils
         foreach ([$first, $second] as $event_action_string) {
             $matches = [];
             $results = \preg_match_all(self::AMP_EVENT_ACTIONS_REGEX_PATTERN, $event_action_string, $matches);
-            if (!$results || !isset($matches['event'])) {
+            if (!$results) {
                 continue;
             }
             foreach ($matches['event'] as $index => $event) {
@@ -349,7 +349,7 @@ class AMP_DOM_Utils
             \array_walk($action_strings_array, static function ($actions) use(&$actions_array) {
                 $matches = [];
                 $results = \preg_match_all(self::AMP_ACTION_REGEX_PATTERN, $actions, $matches);
-                if (!$results || !isset($matches['action'])) {
+                if (!$results) {
                     $actions_array[] = $actions;
                     return;
                 }

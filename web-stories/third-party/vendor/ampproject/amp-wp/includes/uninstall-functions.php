@@ -70,11 +70,6 @@ function delete_posts()
  */
 function delete_terms()
 {
-    // Abort if term splitting has not been done. This is done by WooCommerce so it's
-    // it's also done here for good measure, even though we require WP 4.9+.
-    if (\version_compare(\get_bloginfo('version'), '4.2', '<')) {
-        return;
-    }
     /** @var \wpdb */
     global $wpdb;
     $taxonomy = 'amp_validation_error';
@@ -106,7 +101,7 @@ function delete_transients()
     }
     /** @var \wpdb */
     global $wpdb;
-    $transient_groups = ['Google\\Web_Stories_Dependencies\\AmpProject\\AmpWP\\DevTools\\BlockSourcesamp_block_sources', 'amp-parsed-stylesheet-v%', 'amp_error_index_counts', 'amp_has_page_caching', 'amp_img_%', 'amp_lock_%', 'amp_new_validation_error_urls_count', 'amp_plugin_activation_validation_errors', 'amp_remote_request_%', 'amp_themes_wporg'];
+    $transient_groups = ['Google\\Web_Stories_Dependencies\\AmpProject\\AmpWP\\DevTools\\BlockSourcesamp_block_sources', 'amp-parsed-stylesheet-v%', 'amp_error_index_counts', 'amp_img_%', 'amp_lock_%', 'amp_new_validation_error_urls_count', 'amp_plugin_activation_validation_errors', 'amp_remote_request_%', 'amp_themes_wporg'];
     $where_clause = [];
     foreach ($transient_groups as $transient_group) {
         if (\false !== \strpos($transient_group, '%')) {
