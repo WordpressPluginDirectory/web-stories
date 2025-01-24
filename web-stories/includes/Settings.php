@@ -31,14 +31,12 @@ declare(strict_types = 1);
 namespace Google\Web_Stories;
 
 use Google\Web_Stories\Infrastructure\PluginUninstallAware;
-use Google\Web_Stories\Infrastructure\Registerable;
-use Google\Web_Stories\Infrastructure\Service;
 use Google\Web_Stories\Shopping\Shopping_Vendors;
 
 /**
  * Settings class.
  */
-class Settings implements Service, Registerable, PluginUninstallAware {
+class Settings extends Service_Base implements PluginUninstallAware {
 	/**
 	 * Settings group.
 	 */
@@ -183,7 +181,7 @@ class Settings implements Service, Registerable, PluginUninstallAware {
 	/**
 	 * Register settings.
 	 *
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 * @SuppressWarnings("PHPMD.ExcessiveMethodLength")
 	 *
 	 * @since 1.0.0
 	 */
@@ -454,7 +452,7 @@ class Settings implements Service, Registerable, PluginUninstallAware {
 	/**
 	 * Returns the value for a given setting.
 	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+	 * @SuppressWarnings("PHPMD.BooleanArgumentFlag")
 	 *
 	 * @since 1.12.0
 	 *

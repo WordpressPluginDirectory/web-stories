@@ -142,6 +142,7 @@ class AllowedAttributes implements AttributeInterface
             'direction',
             'display',
             'divisor',
+            'dominant-baseline',
             'dur',
             'edgemode',
             'elevation',
