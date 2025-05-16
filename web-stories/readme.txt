@@ -2,8 +2,8 @@
 
 Contributors:      google
 Tested up to:      6.8
-Requires at least: 6.5
-Stable tag: 1.39.0
+Requires at least: 6.6
+Stable tag: 1.41.0
 License:           Apache-2.0
 License URI:       https://www.apache.org/licenses/LICENSE-2.0
 Tags:              web stories, stories, amp, storytelling, google
@@ -117,6 +117,17 @@ To report a vulnerability in this plugin, please contact the Google Security Tea
 
 For the plugin's full changelog, please see [the Releases page on GitHub](https://github.com/googleforcreators/web-stories-wp/releases).
 
+= 1.42.0 =
+
+* Enhancement: raises minimum WordPress version to 6.6.
+* Enhancement: updated list of available Google Fonts.
+* Fixed: resolved issue with lightbox when using shortcode.
+
+= 1.41.0 =
+
+* Fixed: resolved issue with carousel on right-to-left languages.
+* Fixed: resolved issue with lightbox when using shortcode.
+
 = 1.40.0 =
 
 * Enhancement: performance and UX improvements for the Web Stories block.
@@ -132,16 +143,8 @@ For the plugin's full changelog, please see [the Releases page on GitHub](https:
 * Fixed: improved Google Analytics 4 banner.
 * Fixed: resolved edge case where the media library might crash.
 
-= 1.38.0 =
-
-* Enhancement: compatibility with WordPress 6.6 and 6.7.
-* Enhancement: raises minimum WordPress version to 6.5.
-* Enhancement: updated list of available Google Fonts.
-* Fixed: resolved a minor issue when parsing text elements in the editor.
-* Minor code quality improvements and bug fixes.
-
 == Upgrade Notice ==
 
-= 1.40.0 =
+= 1.42.0 =
 
-This release contains performance improvements, compatibility with WordPress 6.8, and some minor bug fixes.
+This release fixes a minor issues with the Web Stories shortcode. Now requires at least WordPress 6.6.

@@ -355,6 +355,11 @@ abstract class Renderer implements RenderingInterface, Iterator {
 			$this->assets->enqueue_style_asset( self::STYLE_HANDLE );
 		}
 
+		$this->assets->enqueue_script_module(
+			'web-stories-block-view',
+			$this->assets->get_base_url( 'assets/js/web-stories-block-view.js' )
+		);
+
 		if ( $this->context->is_amp() ) {
 			?>
 			<div
